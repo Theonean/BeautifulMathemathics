@@ -1,5 +1,5 @@
-let canvasX = 1000;
-let canvasY = 1000;
+let canvasX = 2600;
+let canvasY = 1200;
 
 let mapData = [];
 let pixelSize = 5
@@ -78,7 +78,7 @@ function checkLine(y) {
     mapCopy[y + 1][x + 1] = result;
     //console.log("Charseg:" + charSegment + " with result " + result);
 
-    let randomPixel = Math.random() > 0.8;
+    let randomPixel = false;//Math.random() > 0.8;
 
     if (result || randomPixel) {
       //console.log("Result:" + result + " at index " + ruleIndex);
@@ -98,6 +98,7 @@ function checkLine(y) {
   //color in next piece if it does
   //->set square and fill
   //->set information
+  alterRandomRules(Math.floor(Math.random() * 2));
 }
 
 function initializeMapData(rows, cols) {
@@ -139,5 +140,12 @@ function toBinary(num) {
     return bin;
   } else {
     return "Invalid input, please enter a number between 0 and 255.";
+  }
+}
+
+function alterRandomRules(amount) {
+  for(let i = 0; i < amount; i++) {
+    let index = Math.floor(Math.random() * transitionRules.length);
+    transitionRules[index] = transitionRules[index] === 0 ? 1 : 0;
   }
 }
